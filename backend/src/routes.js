@@ -3,6 +3,6 @@ import Server from "./controllers/ServerIsRunningController";
 
 const routes = new Router()
 
-routes.get('/hello', Server.handle)
+routes.get('/server', Server.handle)
 
 export default routes
