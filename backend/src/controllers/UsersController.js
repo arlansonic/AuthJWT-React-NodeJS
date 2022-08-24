@@ -1,5 +1,5 @@
-import bcrypt from 'bcrypt'
 import User from "../models/User"
+import { createPasswordHash } from '../services/auth'
 
 class UserController {
     async index(req, res) {
@@ -24,11 +24,10 @@ class UserController {
             if (user) {
                 return res.status(422).json({ message: `User ${email} Already Exists` })
             }
-            // Criando Criptografia para Senha 
-            const salt = await bcrypt.genSalt(12)
-            const hashedPassword = await bcrypt.hash(password, salt);
 
-            const newUser = await User.create({ name, email, password: hashedPassword })
+            const passwordHash = await createPasswordHash(password)
+
+            const newUser = await User.create({ name, email, password: passwordHash })
             console.log(`Usuário Criado com Sucesso: ${email}`)
             return res.status(201).json({ newUser })
 
