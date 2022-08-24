@@ -1,3 +1,4 @@
+import bcrypt from 'bcrypt'
 import User from "../models/User"
 
 class UserController {
@@ -17,14 +18,18 @@ class UserController {
 
     async create(req, res) {
         try {
-            const { name, email, password, confirmPassword } = req.body
+            const { name, email, password } = req.body
             const user = await User.findOne({ email })
 
             if (user) {
                 return res.status(422).json({ message: `User ${email} Already Exists` })
             }
+            // Criando Criptografia para Senha 
+            const salt = await bcrypt.genSalt(12)
+            const hashedPassword = await bcrypt.hash(password, salt);
 
-            const newUser = await User.create({ name, email, password, confirmPassword })
+            const newUser = await User.create({ name, email, password: hashedPassword })
+            console.log(`Usuário Criado com Sucesso: ${email}`)
             return res.status(201).json({ newUser })
 
         } catch (err) {
