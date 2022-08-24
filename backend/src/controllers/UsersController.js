@@ -12,8 +12,21 @@ class UserController {
         }
     }
 
-    async show(req, res) {
+    async search(req, res) {
+        try {
+            const { id } = req.params
+            const user = await User.findById(id)
 
+            if (!user) {
+                return res.status(404).json({ message: "User not Found!" })
+            }
+
+            return res.json({ user })
+
+        } catch (err) {
+            console.error(err)
+            return res.status(500).json({ error: "Internal Server Error!!" })
+        }
     }
 
     async create(req, res) {
