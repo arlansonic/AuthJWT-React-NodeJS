@@ -1,9 +1,22 @@
-export default async (req, res, next) => {
-    const authenticated = false
+import jwt from 'json-web-token'
+import authConfig from '../config/auth'
+import promisify from 'util'
 
-    if(authenticated) {
-        return next()
-    }else{
-        return res.status(401).json({message: "Not Authorized"})
+export default async (req, res, next) => {
+    const authHeader = req.headers.authorization
+
+    if (!authHeader) {
+        return res.status(401).json({ error: 'Token was not Provided' })
     }
+
+    const [, token] = authHeader.split(' ')
+
+    try {
+        const decoded = await promisify(jwt.verify(token, authConfig.secret))
+        req.userId = decoded.id
+
+        return next()
+    } catch (err) {
+        res.status(401).json({ error: 'Token Invalided ' })
+    }    
 }

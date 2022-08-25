@@ -21,5 +21,4 @@ routes.get('/users/:user_id/repositories', RepositoriesController.index)
 routes.post('/users/:user_id/repositories', RepositoriesController.create)
 routes.delete('/users/:user_id/repositories', RepositoriesController.delete)
 
-
 export default routes
