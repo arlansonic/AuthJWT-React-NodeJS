@@ -2,9 +2,12 @@ import { Router } from "express";
 import Server from "./controllers/ServerIsRunningController";
 import UsersController from "./controllers/UsersController";
 import RepositoriesController from "./controllers/RepositoriesController";
+import auth from "./middlewares/auth";
 const routes = new Router()
 
+// Teste Server
 routes.get('/server', Server.handle)
+routes.use(auth)
 
 // RestFull
 routes.get('/users', UsersController.index)
