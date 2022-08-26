@@ -1,13 +1,15 @@
 import { Router } from "express";
 import Server from "./controllers/ServerIsRunningController";
 import UsersController from "./controllers/UsersController";
+import SessionController from './controllers/SessionsController'
 import RepositoriesController from "./controllers/RepositoriesController";
 import auth from "./middlewares/auth";
 const routes = new Router()
 
 // Teste Server
+routes.post('/sessions', SessionController.create)
 routes.get('/server', Server.handle)
-routes.use(auth)
+routes.use(auth) //Middleware apartir daqui está tudo bloqueado
 
 // RestFull
 routes.get('/users', UsersController.index)

@@ -42,7 +42,7 @@ class UserController {
 
             const newUser = await User.create({ name, email, password: passwordHash })
             console.log(`Usuário Criado com Sucesso: ${email}`)
-            return res.status(201).json({ message: "User Successfuly Created", _id })
+            return res.status(201).json({ message: `User Successfuly Created: ${email}` })
 
         } catch (err) {
             console.error(err)
