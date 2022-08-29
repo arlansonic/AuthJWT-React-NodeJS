@@ -1,8 +1,9 @@
 import './App.css';
+import AppRoutes from './AppRoutes';
 
 function App() {
-  return(
-    <h1>App</h1>
+  return (
+    <AppRoutes />
   )
 }
 

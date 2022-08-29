@@ -1,0 +1,32 @@
+#login-page {    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0 2rem;
+}
+
+#login-page .title{
+    color: #fff;
+}
+
+#login-page .form{
+    background-color: #f1f1f1;
+    width: 100%;
+    max-width: 480px;
+    padding: .5rem;
+}
+
+#login-page .field label {
+    display: block;
+}
+
+#login-page .field input {
+    width: 100%;
+}
+
+#login-page .actions {
+    text-align: right;
+    margin-top: 1rem;
+}
