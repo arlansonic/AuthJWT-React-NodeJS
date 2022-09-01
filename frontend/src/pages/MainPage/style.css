@@ -1,3 +1,12 @@
+.loading {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 0 2rem;
+}
+
 #main .nav {
     display: flex;
     align-items: center;
@@ -12,7 +21,8 @@
     margin: 0;
 }
 
-#main .search, #main .new{
+#main .search,
+#main .new {
     display: flex;
     align-items: center;
     gap: 30px;
@@ -58,10 +68,10 @@
     border-bottom: none;
 } */
 
-#main .repositories .item .info{
+#main .repositories .item .info {
     flex: 1
 }
 
-#main .repositories .item .name{
+#main .repositories .item .name {
     font-size: 1.5rem;
 }
