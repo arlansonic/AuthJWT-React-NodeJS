@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../contexts/auth";
 import { Link } from "react-router-dom";
 import Nav from "./Nav";
 import Search from "./Search";
 import Repositories from "./Repositories";
 import { getRepositories, createRepository, DeleteRepository } from '../../services/api'
 import './style.css'
-const userId = '6308489647e35bf43c400be3'
 
 const MainPage = () => {
+    // Recuperar as informações de Login        
+    const { user, logout } = useContext(AuthContext)
     const [repositories, setRepositories] = useState([])
     const [loading, setLoading] = useState(true)
     const [loadingError, setLoadingError] = useState(false)
@@ -15,7 +17,7 @@ const MainPage = () => {
     const loadData = async (query = '') => {
         try {
             setLoading(true)
-            const res = await getRepositories(userId, query)
+            const res = await getRepositories(user?.id, query)
             setRepositories(res.data)
             setLoading(false)
         } catch (err) {
@@ -30,6 +32,7 @@ const MainPage = () => {
 
     const handleLogout = () => {
         console.log('Logout')
+        logout()
     }
 
     const handleSearch = async (query) => {
@@ -39,14 +42,14 @@ const MainPage = () => {
 
     const handleDeleteRepo = async (repository) => {
         console.log('Deletar Repo', repository)
-        await DeleteRepository(userId, repository._id)
+        await DeleteRepository(user?.id, repository._id)
         await loadData()
     }
 
     const handleNewRepo = async (url) => {
         console.log('New Repo', url)
         try {
-            await createRepository(userId, url)
+            await createRepository(user?.id, url)
             await loadData()
         } catch (err) {
             console.error(err)
@@ -81,7 +84,6 @@ const MainPage = () => {
                 onDeleteRepo={handleDeleteRepo}
                 onNewRepo={handleNewRepo}
             />
-
         </div>
     )
 }
