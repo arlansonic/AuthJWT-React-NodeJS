@@ -11,7 +11,7 @@ const AppRoutes = () => {
         const { authenticated, loading } = useContext(AuthContext)
 
         if (loading) {
-            // <div className="loading">Carregando...</div>            
+            return <div className="loading">Carregando...</div>            
         }
 
         if (!authenticated) {

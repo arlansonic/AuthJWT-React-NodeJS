@@ -74,7 +74,7 @@ const MainPage = () => {
     }
 
     return (
-        <div id="main">
+        <div id="main">            
             <Nav onLogout={handleLogout} />
             {/* Pesquisar */}
             <Search onSearch={handleSearch} />
